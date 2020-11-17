@@ -1,10 +1,12 @@
 # !!!Shuflay-Andrew Vang Color blindness TEST!!!!!!
 
 ## Description
-
+# v0.2 Updates
 
 Run a color blindness test. It is a Yes or no program we will give you pictures with questions
 and you will answer 'y' or 'n' if you see it. I've built a point system so every point you get it will add up. I used point++
+If you put in anything else than 'y' or 'n' it will make you try again
+the program runs very nicely and at the end it gives you a option if you want to take the test again say y if not then press 
 
 
 ## Developer
@@ -23,38 +25,42 @@ g++ --std=c++11 main.cpp -o cvp
 Here is an example of the program running:
 
 ```
-g++ -std=c++11 main.cpp -o cvp; ./cvp
-You will 1 point for each color correct
-Picture 1: Please look at Picture 1
-Do you see green? (y/n)
-y
-Do you see orange?
-n
+cout << "Do you see " << colors[0] << "? (y/n)" << endl;
+cin >> color1;
+pickColor(color1, point, myfile);
 ```
 
 ## C++ Guide
 
 ### Variables and Data Types
+string color1;
+string color2;
+string input;
+string colors[]={"green", "orange", "blue", "yellow", "red"};
+int point =0
 
-
- string color1;
- string color2;
- char input;
-these are my variables I put strings of color so I can identify it, and char input because my program is a 'y' || 'no' test.
-I will be using this through my whole project
+these are my variables inside my main program which pretty much runs everything in there.
 
 ### Input and Output
 
-
-output would be use to show onto the code which was cout << "You will 1 point for each color correct" << endl;
-input was what you had to type in cin >> color1; I already string color1.
-
 cout << "You will 1 point for each color correct" << endl;
-  cout << "Picture 1: Please look at Picture 1" << endl;
-  cout << "Do you see green? (y/n)" << endl;
-  cin >> color1;
-  cout << "Do you see orange?" << endl;
-  cin >> color2;
+cout << "Picture 1: Please look at Picture 1" << endl;
+cout << "Do you see " << colors[0] << "? (y/n)" << endl;
+cin >> color1;
+pickColor(color1, point, myfile);
+cout << "Do you see "<< colors[1] << "? (y/n)" << endl;
+cin >> color2;
+pickColor(color2, point, myfile);
+
+cout << "you got " << point << " points" << endl;
+cout << "Type any letter if you want to retake the test." << endl;
+cout << "Type n if you don't want to retake the test." << endl;
+cin >> input;
+cin.ignore();
+
+these are what is going to be display and when you are it says cin it means you will have to type something in.
+
+
 ### Decisions
 
 
@@ -74,6 +80,12 @@ I used a do-while loop so that if the user decides to take the test again he can
   
   while(input != 'n');
   }
+
+  while(inputs(color)){
+cout << "Not a valid input. Please try again." <<endl;
+cin >> color;
+}
+If user types in any other letter than Y or N it would show "Not a valid input. Please try again."
 ### File Input and Output
 
 
@@ -82,4 +94,50 @@ ofstream myfile;
 myfile.open("file.txt");
 if(myfile.is_open()) 
 
-myfile << "you got a point for part a picture 1.\n";
+Since I have provided a function and in the parameters is ofstream & myfile What I have to do is call the function in order to put that data into the file
+
+### Array or Vectors
+
+string colors[]={"green", "orange", "blue", "yellow", "red"}; 
+I have provided an array and you can call those array if you use color[]
+
+
+### Functions
+I have provided two functions which boths meets the requariment of those 6 functions example 
+These functions I call in the main function to put them in use.
+
+void pickColor(string color, int& point, ofstream& myfile);
+bool inputs(string input);
+
+ 
+
+FUNCTION DEFINITION
+void pickColor(string color, int& point, ofstream& myfile)
+{
+while(inputs(color)){
+cout << "Not a valid input. Please try again." <<endl;
+cin >> color;
+}
+if( color == "y") {
+point++;
+myfile << "you got a point for a part of the picture.\n";
+}
+}
+
+
+
+
+ function definition is 
+ bool inputs(string input)
+{
+if(input != "y" && input != "n")
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+ 
+ 
