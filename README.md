@@ -1,12 +1,15 @@
 # !!!Shuflay-Andrew Vang Color blindness TEST!!!!!!
 
 ## Description
-# v0.2 Updates
+# v1.0 Updates
 
-Run a color blindness test. It is a Yes or no program we will give you pictures with questions
-and you will answer 'y' or 'n' if you see it. I've built a point system so every point you get it will add up. I used point++
-If you put in anything else than 'y' or 'n' it will make you try again
-the program runs very nicely and at the end it gives you a option if you want to take the test again say y if not then press 
+
+Runs a color blindness test with 4 question which has a mulitple choice were you can choose it from. You will have to access a file with 4 picture when given the first question you will have to look at picture 1 and etc.
+It will start off by asking if you want to take the test if not then the program ends. If you say yes then you will it will say for you to type in your name.
+Then the program will start asking you questions. The questions are "what number do you see?
+You will need to input lowercase if not then it will say "Incorrect input" and tell you to do it again. 
+At the end of the test it tells you your answer the answer you have put in and the answers you got right will be in the "file.txt"
+this is a one time test!
 
 
 ## Developer
@@ -18,49 +21,70 @@ Andrew Vang
 To run the program, give the following commands:
 
 ```
-g++ --std=c++11 main.cpp -o cvp
+g++ --std=c++11 main.cpp student.cpp -o cvp
 ./cvp
 ```
-
+//note that I did recieve help from a friend telling me I had to put in student.cpp in the .replit file.
 Here is an example of the program running:
 
 ```
-cout << "Do you see " << colors[0] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-```
+"You will be taking a 4 question test! Do you want to take the color blindness test?  y/n?"
+ y/n
+ "what is your name?"
+ User name
+Picture:1 What number do you see?
+Please choose a letter a-c
+a.13
+b.20
+c.12
+
 
 ## C++ Guide
 
 ### Variables and Data Types
-string color1;
-string color2;
-string input;
-string colors[]={"green", "orange", "blue", "yellow", "red"};
-int point =0
+///int main() 
+string name;
+string answer1;
+string answer2;
+int point = 0;
+char letter;
+///private: 
+    char answer;
+    int point;
+    string studAnswer[4];
+    string name;
+    int input1;
+///public: 
+  student (string n){
+      name=n;
+      point = 0;
+  
+  }
 
-these are my variables inside my main program which pretty much runs everything in there.
+I have including my Variables from my main, public and private.
 
 ### Input and Output
 
-cout << "You will 1 point for each color correct" << endl;
-cout << "Picture 1: Please look at Picture 1" << endl;
-cout << "Do you see " << colors[0] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-cout << "Do you see "<< colors[1] << "? (y/n)" << endl;
-cin >> color2;
-pickColor(color2, point, myfile);
-
-cout << "you got " << point << " points" << endl;
-cout << "Type any letter if you want to retake the test." << endl;
-cout << "Type n if you don't want to retake the test." << endl;
-cin >> input;
-cin.ignore();
 
 these are what is going to be display and when you are it says cin it means you will have to type something in.
+///MAIN
+  cout << "You will be taking a 4 question test! Do you want to take the color blindness test?  y/n?" << endl;
+  cin>>letter;
+  cout << "What is your name?" << endl;
+  cin >> name;
 
+  cout <<"The Test is now done!" << endl;
+  cout << Pictures.getName() << " score " << Pictures.getTotal() << endl; 
+  cout << Pictures.getName() << " answers were: ";
 
+ ///student.cpp
+  cout << "Picture:2 What number do you see?" << endl;
+  cout << "Please choose a letter a-c" << endl;
+  cout << "a. 3 \n" << "b. 42 \n" << "c. 15 " << endl;
+  cout<<"Incorrect input, try again" << endl;
+  cin>>answer2;
+
+  cout << "Incorrect! The right answer was 42" << endl;
 ### Decisions
 
 
@@ -72,72 +96,124 @@ if( color1 == "y") {
   if(color2 == "y"){
     point++;
     
-### Iteration
+     if(input == 'a' || input == 'b' || input == 'c')
+     if(answer1 == 'c' )
+     else{
+    cout << "Incorrect! The right answer was 12" << endl;
+    
 
-
-I used a do-while loop so that if the user decides to take the test again he can take it again or if he doesn't then he can input 'n' if he does then input 'y'
-  do{
-  
-  while(input != 'n');
   }
 
-  while(inputs(color)){
-cout << "Not a valid input. Please try again." <<endl;
-cin >> color;
-}
-If user types in any other letter than Y or N it would show "Not a valid input. Please try again."
+### Iteration
+  while(!(input(answer1))){
+  }
+  this while loop is used for if the users uses any other letter than its suppsoe to.
+  for(int i=0; i<4; i++)
+  this for loop shows you answers at the end.
+
+
+
+
+
+
+
+
 ### File Input and Output
 
 
-This is making my file. This program should take the users input if they put 'y' then it will send it to a file that you have created so it can have the data.
+This is making my file. This program should take the users input if they put any correct answer then it will send it to a file that you have created so it can have the data.
 ofstream myfile;
 myfile.open("file.txt");
 if(myfile.is_open()) 
-
+myfile << "NICE! you got a point for picture 1\n";
 Since I have provided a function and in the parameters is ofstream & myfile What I have to do is call the function in order to put that data into the file
 
 ### Array or Vectors
-
-string colors[]={"green", "orange", "blue", "yellow", "red"}; 
-I have provided an array and you can call those array if you use color[]
+string studAnswer[4];
+this is the array that I am using to use to store the users answers
+studAnswer[0]=answer1;
+the array is equal or stored in the answers
 
 
 ### Functions
-I have provided two functions which boths meets the requariment of those 6 functions example 
-These functions I call in the main function to put them in use.
+My functions that are in the header file.
+void Picture1(char answer1, ostream & myfile);
+  void Point();
+  void Picture2(char answer2, ostream & myfile);
+  void Picture3(char answer3, ostream & myfile);
+  void Picture4(char answer4, ostream & myfile);
+  string getName(){
+    return name; /// I had help on this function!!! from my friend Inderdeep he said its a small function so it wouldn't be that much of a problem
+  }
+  bool input(char answer);
+  void printTotal();
+  int getTotal(){
+   return point;
+ }
+};
 
 void pickColor(string color, int& point, ofstream& myfile);
 bool inputs(string input);
 
  
 
-FUNCTION DEFINITION
-void pickColor(string color, int& point, ofstream& myfile)
+My FUNCTION DEFINITION that are in my Student.cpp file
+///bool student::input(char input)
 {
-while(inputs(color)){
-cout << "Not a valid input. Please try again." <<endl;
-cin >> color;
+  if(input == 'a' || input == 'b' || input == 'c')
+{
+  return true;
 }
-if( color == "y") {
-point++;
-myfile << "you got a point for a part of the picture.\n";
+  else
+{
+  return false;
 }
 }
 
+///void student::Point(){
+  point++;                                    THIS IS MY POINT FUNCTION
+  cout << "NICE! you got a point" << endl;
+}
+///void student::Picture1(char answer1, ostream& myfile){
+  cout << "Picture:1 What number do you see?" << endl;
+  cout << "Please choose a letter a-c" << endl;               THIS FUNCTION IS BEING USED 4 times in the main file and it displays the mulitple choice answers and gives you point and also inside of this function is a nested function
+  cout << "a. 13 \n" << "b. 20 \n" << "c. 12 " << endl;
+  cin >> answer1;
+  while(!(input(answer1))){
+
+    cout<<"Incorrect input, try again" << endl;
+    cin>>answer1;
+  }
+  studAnswer[0]=answer1;
+  if(answer1 == 'c' ){
+    Point();
+  
+    myfile << "NICE! you got a point for picture 1\n";
+
+  }
+
+  else{
+    cout << "Incorrect! The right answer was 12" << endl;
+    
+
+  }
+}
+
+///void student::printTotal(){ This function is use for the students answer.
+for(int i=0; i<4; i++){
+  cout<< studAnswer[i] << " ";
+}
 
 
-
- function definition is 
- bool inputs(string input)
-{
-if(input != "y" && input != "n")
-{
-return true;
-}
-else
-{
-return false;
-}
-}
- 
+ ### Classes
+student Pictures Pictures is my object for my class so when im calling the functionm in the headers files I would displau Pictures.Picture1();
+with classes I had three files which is main.cpp, student.cpp, student.h
+now with classes my class was called student so it was easier to access. moving on in the h file I had my public and private. which holds my functions and variables.
+my cpp file was my function definition in order to access this I would had to but student::..anyfunction..() these three files has to be access by using 
+#include "student.h"
+#ifndef STUDENT_H
+#define STUDENT_H
+these three makes it accessablle in the main.
+As I was told you need a constructor In every class you make, my constructor is student (string n)
+!!!Replace with a summary and examples of how classes have been used effectively and appropriately!!!
  

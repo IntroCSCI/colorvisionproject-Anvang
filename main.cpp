@@ -1,99 +1,47 @@
 #include <iostream>
+#include "student.h"
 #include <fstream>
-using namespace std;
-void pickColor(string color, int& point, ofstream& myfile);
-bool inputs(string input);
 
-// when typing your input it should be one character and enter.
-int main()
-{
-string color1;
-string color2;
-string input;
-string colors[]={"green", "orange", "blue", "yellow", "red"};
+using namespace std;
+// Make sure you answer in all lowercase!!!
+// this test will give you a 4 question test!
+//PLease when you see the question go onto the files with pictures on the left and see.
+
+int main(){
+string name;
+string answer1;
+string answer2;
+int point = 0;
+char letter;
 
 ofstream myfile;
 myfile.open("file.txt");
 if(myfile.is_open()){
-do{
-// MAKE SURE YOU USE LOWER CASE CHARACTERS!!!!!
-// The code that ask you what color you see and ask for a y or a n
-int point = 0;
-cout << "You will 1 point for each color correct" << endl;
-cout << "Picture 1: Please look at Picture 1" << endl;
-cout << "Do you see " << colors[0] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-cout << "Do you see "<< colors[1] << "? (y/n)" << endl;
-cin >> color2;
-pickColor(color2, point, myfile);
 
-cout << "you got " << point << " points" << endl;
+  cout << "You will be taking a 4 question test! Do you want to take the color blindness test?  y/n?" << endl;
+  cin>>letter;
+  if(letter == 'y'){
 
-cout << "Picture 2: Please look at Picture 2" << endl;
-cout << "Do you see "<< colors[2] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-cout << "Do you see "<< colors[3] << "? (y/n)" << endl;
-cin >> color2;
-pickColor(color2, point, myfile);
+    cout << "What is your name?" << endl;
+    cin >> name;
 
-cout << "you got " << point << " points" << endl;
+    student Pictures(name);
+    //these are the four functions that represents the questions
+    Pictures.Picture1('a', myfile);
+    Pictures.Picture2('b', myfile);
+    Pictures.Picture3('c', myfile);
+    Pictures.Picture4('d', myfile);
 
-cout << "Picture 3: Please look at Picture 3" << endl;
-cout << "Do you see "<< colors[2] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-cout << "Do you see "<< colors[4] << "? (y/n)" << endl;
-cin >> color2;
-pickColor(color2, point, myfile);
 
-cout << "you got " << point << " points" << endl;
-
-cout << "Picture 4: Please look at Picture 4" << endl;
-cout << "Do you see "<< colors[0] << "? (y/n)" << endl;
-cin >> color1;
-pickColor(color1, point, myfile);
-cout << "Do you see "<< colors[4] << "? (y/n)" << endl;
-cin >> color2;
-pickColor(color2, point, myfile);
-
-cout << "you got " << point << " points" << endl;
-
-cout << "Type any letter if you want to retake the test." << endl;
-cout << "Type n if you don't want to retake the test." << endl;
-cin >> input;
-cin.ignore();
-
-}
-while(input != "n");
-}
+    cout <<"The Test is now done!" << endl;
+    cout << Pictures.getName() << " score " << Pictures.getTotal() << " out of 4" << endl; 
+    cout << Pictures.getName() << " answers were: ";
+    Pictures.printTotal();
+  }
+  else{
+  cout<< "Okay maybe next time" << endl;
+  }
+  }
 myfile.close();
 return 0;
 }
-// the correct answers will be display in the text files
-// adds points to each picture and holds the Not invalid message
-void pickColor(string color, int& point, ofstream& myfile)
-{
-while(inputs(color)){
-cout << "Not a valid input. Please try again." <<endl;
-cin >> color;
-}
-if( color == "y") {
-point++;
-myfile << "you got a point for a part of the picture.\n";
-}
-}
-// if you put anything other the y or n the code would output not valid
-bool inputs(string input)
-{
-if(input != "y" && input != "n")
-{
-return true;
-}
-else
-{
-return false;
-}
-}
-
